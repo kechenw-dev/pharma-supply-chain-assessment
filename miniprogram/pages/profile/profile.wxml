@@ -2,9 +2,9 @@
   <view class="hero"><view class="hero-title">先选你的业务背景</view><view class="hero-sub">同一问题会根据生产、委托或贸易模式调整措辞。</view></view>
   <view class="card">
     <view class="field-label">企业类型</view>
-    <picker range="{{businesses}}" range-key="label" bindchange="pickBusiness"><view class="field-input">{{businessIndex &lt; 0 ? '请选择' : businesses[businessIndex].label}}</view></picker>
+    <picker range="{{businesses}}" range-key="label" bindchange="pickBusiness"><view class="field-input">{{businessLabel}}</view></picker>
     <view class="field-label">你的岗位</view>
-    <picker range="{{roles}}" range-key="label" bindchange="pickRole"><view class="field-input">{{roleIndex &lt; 0 ? '请选择' : roles[roleIndex].label}}</view></picker>
+    <picker range="{{roles}}" range-key="label" bindchange="pickRole"><view class="field-input">{{roleLabel}}</view></picker>
     <button class="btn-primary" bindtap="next">进入问卷</button>
   </view>
   <view class="footer-note">请根据自己了解的业务回答。不清楚的事项可以选择“不清楚”。</view>

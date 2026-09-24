@@ -3,7 +3,7 @@ const TYPES = [{ value: 'remote', label: '远程单一问题' }, { value: 'onsit
 
 Page({
   data: {
-    mode: 'create', application: null, project: null, types: TYPES, typeIndex: 0, busy: false,
+    mode: 'create', application: null, project: null, showBankConfirm: false, types: TYPES, typeIndex: 0, busy: false,
     form: { buyerName: '', buyerTaxId: '', title: '', scope: '', deliverables: '', quoteYuan: '' },
     acceptanceReference: '', bankReference: '', inviteName: '', invitePhone: '', inviteAuthorization: '', revokeAuthorization: '', inviteCode: '', deliveryName: '', deliveryAuthorization: '', deliveryChannel: 'wechat',
     draft: { summary: '', evidence: '', risks: '', actions: '', inventoryNote: '', limits: '' }
@@ -22,7 +22,7 @@ Page({
   async refresh() {
     try {
       const project = await api('adminGetProject', { id: this.projectId })
-      this.setData({ project: { ...project, externalDeliveries: project.externalDeliveries || [] }, draft: project.reportDraft || this.data.draft })
+      this.setData({ project: { ...project, externalDeliveries: project.externalDeliveries || [] }, showBankConfirm: project.quoteStatus === 'accepted' && project.paymentStatus === 'unpaid', draft: project.reportDraft || this.data.draft })
     } catch (error) { message(error) }
   },
   deep() { wx.navigateTo({ url: `/pages/admin-deep/admin-deep?id=${this.projectId}` }) },
