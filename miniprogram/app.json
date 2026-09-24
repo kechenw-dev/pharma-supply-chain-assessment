@@ -16,9 +16,9 @@
   ],
   "window": {
     "navigationBarTitleText": "供应链健康评估",
-    "navigationBarBackgroundColor": "#123B58",
+    "navigationBarBackgroundColor": "#102F35",
     "navigationBarTextStyle": "white",
-    "backgroundColor": "#F5F8FA",
+    "backgroundColor": "#F3F6F4",
     "backgroundTextStyle": "light"
   },
   "style": "v2",

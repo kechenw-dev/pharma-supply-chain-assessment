@@ -1,26 +1,37 @@
-<view class="page" wx:if="{{assessment}}">
-  <view class="hero"><view class="hero-title">你的供应链体检结果</view><view class="hero-sub">{{assessment.companyName}} · {{assessment.date}}</view></view>
-  <view class="card">
-    <view class="section-title">整体观察</view>
-    <view wx:if="{{!insufficient}}" class="count">{{countText}}</view>
-    <view wx:else class="body">整体信息不足，建议由熟悉流程的同事共同核实。</view>
-    <view class="muted">“不清楚” {{unknownCount}} 题。此计数仅来自本次自评，不是行业健康分或百分制评分。</view>
+<view class="page result-page" wx:if="{{assessment}}">
+  <view class="result-hero">
+    <view class="result-eyebrow">SUPPLY CHAIN CHECKUP</view>
+    <view class="result-title">供应链体检结果</view>
+    <view class="result-company">{{assessment.companyName}} · {{assessment.date}}</view>
+    <view class="result-summary">
+      <view class="summary-label">整体观察</view>
+      <view wx:if="{{!insufficient}}" class="summary-number">{{countText}}</view>
+      <view wx:else class="summary-number">信息仍需补充</view>
+      <view class="summary-note">“不清楚” {{unknownCount}} 题 · 仅依据本次自评</view>
+    </view>
   </view>
-  <view wx:if="{{alerts.length}}" class="card alert"><view class="section-title">质量与供应风险需单独核实</view><view class="body" wx:for="{{alerts}}" wx:key="id">{{item.text}}</view></view>
-  <view class="section-title">七个维度</view>
-  <view class="card" wx:for="{{dimensions}}" wx:key="id">
-    <view class="row"><view class="dim-title">{{item.title}}</view><view class="status">{{item.stateLabel}}</view></view>
-    <view wx:if="{{item.hook}}" class="body">可能的线索：{{item.hook}}</view>
-    <view wx:if="{{item.action}}" class="muted">先做一步：{{item.action}}</view>
-    <view wx:if="{{item.unknownCount}}" class="muted">本维还有 {{item.unknownCount}} 项待核实。</view>
+  <view wx:if="{{alerts.length}}" class="attention-card">
+    <view class="attention-mark">!</view>
+    <view><view class="attention-title">质量与供应风险需单独核实</view><view class="attention-text" wx:for="{{alerts}}" wx:key="id">{{item.text}}</view></view>
   </view>
-  <view class="card">
-    <view class="section-title">优先核查线索</view>
+  <view class="result-section-head"><view><view class="result-eyebrow green">SEVEN DIMENSIONS</view><view class="result-section-title">七维管理表现</view></view><view class="result-count">07</view></view>
+  <view class="dimension-card" wx:for="{{dimensions}}" wx:key="id">
+    <view class="dimension-header"><view class="dimension-number">{{item.number}}</view><view class="dimension-name">{{item.title}}</view></view>
+    <view class="dimension-status {{item.stateClass}}">{{item.stateLabel}}</view>
+    <view wx:if="{{item.hook}}" class="dimension-hook">{{item.hook}}</view>
+    <view wx:if="{{item.action}}" class="dimension-action"><text class="action-dot">●</text><text>先做一步：{{item.action}}</text></view>
+    <view wx:if="{{item.unknownCount}}" class="dimension-unknown">本维还有 {{item.unknownCount}} 项待核实</view>
+  </view>
+  <view class="result-section-head"><view><view class="result-eyebrow green">NEXT STEPS</view><view class="result-section-title">优先核查线索</view></view></view>
+  <view class="card finding-card">
     <view wx:if="{{!findings.length}}" class="muted">目前没有从已知回答中发现需要优先核查的机制线索；这不代表企业没有其他问题。</view>
-    <view wx:for="{{findings}}" wx:key="dimension" class="finding"><view class="dim-title">{{index + 1}}. {{item.dimension}}</view><view class="body">{{item.hook}}</view><view class="muted">建议：{{item.action}}</view></view>
+    <view wx:for="{{findings}}" wx:key="dimension" class="finding">
+      <view class="finding-top"><view class="finding-index">{{index + 1}}</view><view class="finding-title">{{item.dimension}}</view></view>
+      <view class="finding-hook">{{item.hook}}</view>
+      <view class="finding-action">建议：{{item.action}}</view>
+    </view>
   </view>
-  <view class="footer-note">{{assessment.result.disclaimer}}</view>
-  <button class="btn-primary" bindtap="consult">联系咨询</button>
-  <button class="btn-secondary" bindtap="diagnosis">申请正式诊断</button>
+  <view class="result-cta"><view class="result-cta-title">需要进一步判断？</view><view class="result-cta-text">与你一起核实问题、证据和适合的诊断范围。</view><button class="btn-primary" bindtap="consult">联系顾问</button><button class="btn-secondary" bindtap="diagnosis">申请正式诊断</button></view>
+  <view class="footer-note">{{assessment.result.disclaimer}} 此计数不是行业健康分或百分制评分。</view>
   <button class="btn-plain" bindtap="home">返回首页</button>
 </view>

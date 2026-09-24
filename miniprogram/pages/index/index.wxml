@@ -1,22 +1,26 @@
-<view class="page">
-  <view class="hero">
-    <view class="hero-title">医药供应链</view><view class="hero-title">健康评估</view>
-    <view class="hero-sub">从真实工作场景出发，发现信息、计划、供应商、库存和交付中的管理线索。</view>
+<view class="page home-page">
+  <view class="home-hero">
+    <view class="home-brand"><view class="brand-mark">S</view><view>SCCM · 供应链长效管理</view></view>
+    <view class="home-headline"><view>看清问题，</view><view>推动改善。</view></view>
+    <view class="home-lead">从一次体检开始，找到医药供应链中值得优先处理的管理问题。</view>
+    <view class="hero-metrics"><view class="hero-metric"><text class="metric-number">07</text><text class="metric-label">个管理维度</text></view><view class="metric-divider"></view><view class="hero-metric"><text class="metric-number">约 5</text><text class="metric-label">分钟快速体检</text></view></view>
   </view>
-  <view class="card">
-    <view class="section-title">约 5 分钟，了解七个维度</view>
-    <view class="tag">信息与闭环</view><view class="tag">计划与物料</view><view class="tag">供应商</view><view class="tag">库存</view><view class="tag">仓储交付</view><view class="tag">数据支持</view><view class="tag">质量风险</view>
-    <view class="body muted">适用药品、原料药、中间体、辅料生产企业，以及 MAH、CDMO、贸易和流通企业。题目会按业务类型调整。</view>
-    <button class="btn-primary" bindtap="start">开始免费体检</button>
+  <view class="home-section-heading"><view><view class="home-eyebrow">START HERE</view><view class="home-section-title">从哪里开始</view></view><view class="section-index">01 / 03</view></view>
+  <view class="start-card" bindtap="start">
+    <view class="start-card-top"><view class="start-icon">◎</view><view class="start-badge">免费</view></view>
+    <view class="start-title">供应链快速体检</view>
+    <view class="start-desc">用真实工作场景，查看七个维度的管理线索和优先核查事项。</view>
+    <view class="start-action">开始体检 <text>→</text></view>
   </view>
-  <view class="card">
-    <view class="section-title">你会得到什么</view>
-    <view class="body">七维表现、已落实机制的透明计数、优先核查线索和初步行动建议。</view>
-    <view class="divider"></view>
-    <view class="muted">完整免费结果需要登记企业名称、联系人、职位和手机号。评估人员会主动联系解读本次自评结果。</view>
+  <view class="home-actions">
+    <view class="action-tile" bindtap="reports"><view class="tile-icon">▤</view><view class="tile-title">我的报告</view><view class="tile-sub">查看已授权的正式报告</view><view class="tile-arrow">↗</view></view>
+    <view class="action-tile" bindtap="consult"><view class="tile-icon">✦</view><view class="tile-title">联系顾问</view><view class="tile-sub">讨论问题与诊断范围</view><view class="tile-arrow">↗</view></view>
   </view>
-  <button class="btn-secondary" bindtap="reports">查看我的报告</button>
-  <button class="btn-plain" bindtap="consult">联系咨询</button>
+  <view class="home-section-heading scene-heading"><view><view class="home-eyebrow">REAL WORK SCENES</view><view class="home-section-title">体检关注什么</view></view></view>
+  <view class="scene-card"><view class="scene-number">01</view><view class="scene-content"><view class="scene-title">信息有没有接上</view><view class="scene-desc">需求变更后，内外部能否依据同一版本执行，问题能否找到负责人并闭环。</view></view></view>
+  <view class="scene-card"><view class="scene-number">02</view><view class="scene-content"><view class="scene-title">计划能否带动物料</view><view class="scene-desc">关键物料是否分级管理，生产计划与供应商交付是否及时衔接。</view></view></view>
+  <view class="scene-card"><view class="scene-number">03</view><view class="scene-content"><view class="scene-title">库存与交付是否可见</view><view class="scene-desc">识别库存结构、周转与仓储交付中的待核实问题，不使用无来源的行业合格线。</view></view></view>
+  <view class="home-foot-card"><view class="foot-accent"></view><view><view class="foot-title">一份结果，也是下一步的起点</view><view class="muted">体检后查看七维表现和初步建议；需要深入判断时，再与你确认远程或现场诊断范围。</view></view></view>
   <button wx:if="{{isAdmin}}" class="btn-plain" bindtap="admin">管理后台</button>
-  <view class="footer-note">本工具根据答题者的了解提供自评线索，不等同于企业审计或 GMP 合规认定。</view>
+  <view class="footer-note">完整免费结果需登记企业名称、联系人、职位和手机号，评估人员会主动联系解读。自评不等同于企业审计或 GMP 合规认定。</view>
 </view>

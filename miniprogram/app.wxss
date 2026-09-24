@@ -18,3 +18,20 @@ page { background: #F5F8FA; color: #17324D; font-size: 30rpx; }
 .divider { height: 1rpx; background: #E7ECEF; margin: 24rpx 0; }
 .row { display: flex; align-items: center; justify-content: space-between; gap: 20rpx; }
 .footer-note { font-size: 23rpx; color: #738391; line-height: 1.65; margin: 20rpx 0 50rpx; }
+
+/* SCCM visual system */
+page { background: #F3F6F4; color: #173631; font-size: 29rpx; }
+.page { padding: 28rpx 28rpx 56rpx; }
+.hero { background: linear-gradient(145deg, #102F35, #0D5E59); border-radius: 30rpx; box-shadow: 0 16rpx 36rpx rgba(15, 75, 73, .16); }
+.hero-sub { color: #D9F2EA; opacity: 1; }
+.card { border: 1rpx solid #E7EEEA; border-radius: 25rpx; box-shadow: 0 8rpx 26rpx rgba(26, 62, 56, .045); }
+.section-title { color: #173631; }
+.muted { color: #657A74; }
+.tag { color: #087E73; background: #E4F5EE; }
+button::after { border: 0; }
+.btn-primary { background: #078C7D; border-radius: 17rpx; box-shadow: 0 8rpx 18rpx rgba(7, 140, 125, .18); }
+.btn-secondary { background: #E5F4ED; color: #11695F; border-radius: 17rpx; }
+.btn-plain { background: #fff; color: #087E73; border-color: #BBDCD1; border-radius: 17rpx; }
+.field-input, .field-textarea { border-color: #D8E5DF; background: #FAFCFB; color: #173631; }
+.divider { background: #E8EFEB; }
+.footer-note { color: #758781; }

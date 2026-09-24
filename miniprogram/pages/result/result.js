@@ -10,7 +10,7 @@ Page({
       const result = assessment.result
       this.setData({
         assessment: { ...assessment, date: (assessment.createdAt || '').slice(0, 10) },
-        dimensions: result.dimensions.map(d => ({ ...d, stateLabel: LABELS[d.state] || '待核实' })),
+        dimensions: result.dimensions.map((d, index) => ({ ...d, number: String(index + 1).padStart(2, '0'), stateLabel: LABELS[d.state] || '待核实', stateClass: 'state-' + (d.state || 'unknown') })),
         findings: result.findings.map(f => ({ ...f, stateLabel: LABELS[f.state] })),
         alerts: result.alerts,
         insufficient: result.informationInsufficient,

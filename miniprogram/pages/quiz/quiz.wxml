@@ -1,8 +1,10 @@
 <view class="page">
-  <view class="row"><view class="tag">{{dimension}}</view><view class="muted">{{progress}}</view></view>
+  <view class="quiz-top"><view class="quiz-eyebrow">快速体检 · {{dimension}}</view><view class="quiz-progress">{{progress}}</view></view>
+  <view class="progress-track"><view class="progress-fill" style="width: {{progressPercent}}%;"></view></view>
   <view class="card">
-    <view class="section-title">{{current.text}}</view>
-    <view class="option {{selected == item.value ? 'option-active' : ''}}" wx:for="{{options}}" wx:key="value" data-value="{{item.value}}" bindtap="choose">{{item.label}}</view>
+    <view class="question-number">QUESTION {{progress}}</view>
+    <view class="section-title question-title">{{current.text}}</view>
+    <view class="option {{selected == item.value ? 'option-active' : ''}}" wx:for="{{options}}" wx:key="value" data-value="{{item.value}}" bindtap="choose"><view class="option-radio"></view><view>{{item.label}}</view></view>
   </view>
   <button class="btn-primary" bindtap="next">{{index + 1 == questions.length ? '完成答题' : '下一题'}}</button>
   <button wx:if="{{index > 0}}" class="btn-plain" bindtap="previous">上一题</button>
