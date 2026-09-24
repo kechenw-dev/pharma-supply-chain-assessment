@@ -1,0 +1,14 @@
+{
+  "name": "pharma-supply-chain-miniapp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "医药供应链健康评估微信小程序",
+  "scripts": {
+    "test": "node --test",
+    "fetch:font": "node scripts/fetch-font.js",
+    "check": "node --check cloudfunctions/assessmentApi/index.js && node --check miniprogram/app.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

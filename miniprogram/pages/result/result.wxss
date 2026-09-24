@@ -1,0 +1,6 @@
+.count { font-size: 36rpx; font-weight: 700; color: #0F766E; margin-bottom: 14rpx; }
+.alert { border-left: 8rpx solid #CA4C29; background: #FFF9F5; }
+.dim-title { font-size: 29rpx; font-weight: 600; }
+.status { color: #0F766E; font-size: 23rpx; white-space: nowrap; }
+.finding { border-top: 1rpx solid #E7ECEF; padding: 20rpx 0; }
+.finding:first-child { border-top: 0; }

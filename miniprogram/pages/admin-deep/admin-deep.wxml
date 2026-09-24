@@ -1,0 +1,15 @@
+<view class="page">
+  <view class="hero"><view class="hero-title">正式诊断访谈</view><view class="hero-sub">{{title}} · 按项目范围记录适用问题、证据来源与待核实事项。</view></view>
+  <view wx:if="{{!paid}}" class="card error">项目尚未核实到账，暂不能保存深入访谈。</view>
+  <view class="card" wx:for="{{questions}}" wx:key="id">
+    <view class="section-title">{{item.id}} · {{item.title}}</view>
+    <textarea class="field-textarea" value="{{responses[item.id].answer}}" data-id="{{item.id}}" data-field="answer" bindinput="input" placeholder="记录回答；不适用或暂不提供也请写明"/>
+    <view class="field-label">来源／访谈对象</view><input class="field-input" value="{{responses[item.id].source}}" data-id="{{item.id}}" data-field="source" bindinput="input" placeholder="例如采购经理访谈、ERP 导出、自报估计"/>
+    <view wx:if="{{item.id == 'D7' || item.id == 'D9'}}">
+      <view class="field-label">统计期间</view><input class="field-input" value="{{responses[item.id].period}}" data-id="{{item.id}}" data-field="period" bindinput="input" placeholder="例如 2025 年度"/>
+      <view class="field-label">币种</view><input class="field-input" value="{{responses[item.id].currency}}" data-id="{{item.id}}" data-field="currency" bindinput="input" placeholder="例如人民币"/>
+    </view>
+  </view>
+  <view class="footer-note">库存周转需先核对 D7 与 D9 的主体、期间、币种和成本口径。此页是内部访谈记录，不会自动发送给客户。</view>
+  <button class="btn-primary" disabled="{{!paid || busy}}" loading="{{busy}}" bindtap="save">保存访谈记录</button>
+</view>

@@ -1,0 +1,47 @@
+<view class="page">
+  <view wx:if="{{mode == 'create' &amp;&amp; application}}">
+    <view class="hero"><view class="hero-title">建立诊断项目</view><view class="hero-sub">先确认服务范围、交付物和含税报价，再让客户确认。</view></view>
+    <view class="card"><view class="muted">客户问题：{{application.issue}}</view>
+      <view class="field-label">诊断方式</view><picker range="{{types}}" range-key="label" value="{{typeIndex}}" bindchange="pickType"><view class="field-input">{{types[typeIndex].label}}</view></picker>
+      <view class="field-label">购买方企业 *</view><input class="field-input" value="{{form.buyerName}}" data-field="buyerName" bindinput="formInput"/>
+      <view class="field-label">购买方税号（可后补）</view><input class="field-input" value="{{form.buyerTaxId}}" data-field="buyerTaxId" bindinput="formInput"/>
+      <view class="field-label">项目名称 *</view><input class="field-input" value="{{form.title}}" data-field="title" bindinput="formInput"/>
+      <view class="field-label">诊断范围 *</view><textarea class="field-textarea" value="{{form.scope}}" data-field="scope" bindinput="formInput"/>
+      <view class="field-label">交付物 *</view><textarea class="field-textarea" value="{{form.deliverables}}" data-field="deliverables" bindinput="formInput"/>
+      <view class="field-label">含税报价（元）*</view><input class="field-input" type="digit" value="{{form.quoteYuan}}" data-field="quoteYuan" bindinput="formInput"/>
+      <button class="btn-primary" loading="{{busy}}" bindtap="create">建立项目草案</button>
+    </view>
+  </view>
+  <view wx:elif="{{project}}">
+    <view class="hero"><view class="hero-title">{{project.title}}</view><view class="hero-sub">{{project.buyerName}} · {{project.type == 'onsite' ? '现场全链路' : '远程专题'}}</view></view>
+    <view class="card"><view class="section-title">报价与收款</view><view class="body">诊断范围：{{project.scope}}</view><view class="body">交付物：{{project.deliverables}}</view><view class="body">报价：{{project.quoteCents / 100}} 元（含税口径以合同为准）</view><view class="muted">报价状态：{{project.quoteStatus}} · 收款状态：{{project.paymentStatus}}</view>
+      <button wx:if="{{project.quoteStatus == 'draft'}}" class="btn-secondary" bindtap="sendQuote">记录已发送报价</button>
+      <view wx:if="{{project.quoteStatus == 'sent'}}"><view class="field-label">合同编号或客户确认依据 *</view><input class="field-input" value="{{acceptanceReference}}" data-field="acceptanceReference" bindinput="input"/><button class="btn-secondary" bindtap="acceptQuote">记录客户已确认</button></view>
+      <view wx:if="{{project.quoteStatus == 'accepted' &amp;&amp; project.paymentStatus == 'unpaid'}}"><view class="field-label">银行实际到账流水参考 *</view><input class="field-input" value="{{bankReference}}" data-field="bankReference" bindinput="input"/><button class="btn-primary" bindtap="confirmTransfer">核实并记录对公到账</button></view>
+    </view>
+    <view class="card"><view class="section-title">购买方指定接收人</view><view class="muted">已绑定 {{project.recipients.length}} 人。确认购买方授权后才生成邀请码。</view><view class="field-label">接收人姓名</view><input class="field-input" value="{{inviteName}}" data-field="inviteName" bindinput="input"/><view class="field-label">接收人手机号</view><input class="field-input" type="number" value="{{invitePhone}}" data-field="invitePhone" bindinput="input"/><view class="field-label">购买方授权依据 *</view><input class="field-input" value="{{inviteAuthorization}}" data-field="inviteAuthorization" bindinput="input" placeholder="例如合同联系人确认日期及记录编号"/><button class="btn-secondary" bindtap="invite">生成一次性邀请码</button><view wx:if="{{inviteCode}}"><view class="field-label">仅本次显示的邀请码</view><view class="field-input">{{inviteCode}}</view><button class="btn-plain" bindtap="copyInvite">复制并发送给指定人</button></view><view wx:if="{{project.recipients.length}}"><view class="field-label">撤销授权依据（撤销前填写）</view><input class="field-input" value="{{revokeAuthorization}}" data-field="revokeAuthorization" bindinput="input"/><view wx:for="{{project.recipients}}" wx:key="*this" class="body">{{item}} <button class="btn-plain" data-openid="{{item}}" bindtap="revokeRecipient">撤销</button></view></view></view>
+    <view class="card"><view class="section-title">深入访谈</view><view class="muted">正式合作后，按项目范围记录 16 项深入题的回答与来源；不自动形成客户报告。</view><button class="btn-secondary" bindtap="deep">打开访谈记录</button></view>
+    <view class="card"><view class="section-title">人工报告工作稿</view><view class="muted">保存后先生成 PDF 预览，你看过且确认接收人后才发布。</view>
+      <view class="field-label">结论摘要 *</view><textarea class="field-textarea" value="{{draft.summary}}" data-field="summary" bindinput="draftInput"/>
+      <view class="field-label">证据与来源 *</view><textarea class="field-textarea" value="{{draft.evidence}}" data-field="evidence" bindinput="draftInput"/>
+      <view class="field-label">风险与待核实事项 *</view><textarea class="field-textarea" value="{{draft.risks}}" data-field="risks" bindinput="draftInput"/>
+      <view class="field-label">建议行动 *</view><textarea class="field-textarea" value="{{draft.actions}}" data-field="actions" bindinput="draftInput"/>
+      <view class="field-label">库存结构与周转（适用时）</view><textarea class="field-textarea" value="{{draft.inventoryNote}}" data-field="inventoryNote" bindinput="draftInput"/>
+      <view class="field-label">服务边界与限制</view><textarea class="field-textarea" value="{{draft.limits}}" data-field="limits" bindinput="draftInput"/>
+      <button class="btn-secondary" bindtap="saveDraft">保存工作稿</button>
+      <button wx:if="{{project.reportDraft}}" class="btn-plain" bindtap="preview">生成并查看 PDF 预览</button>
+      <button wx:if="{{project.previewFileId}}" class="btn-primary" bindtap="publish">人工批准并发布报告</button>
+      <view class="muted">报告状态：{{project.reportStatus}} · 当前版本：{{project.reportVersion}}</view>
+    </view>
+    <view class="card" wx:if="{{project.reportStatus == 'published'}}">
+      <view class="section-title">正式报告与人工外发</view>
+      <view class="muted">仅在核对购买方指定接收人后，使用已批准的版本人工发送。</view>
+      <button class="btn-secondary" bindtap="openApproved">打开已批准 PDF</button>
+      <view class="field-label">实际外发渠道</view><view class="row">微信 <switch checked="{{deliveryChannel == 'wecom'}}" bindchange="chooseChannel"/> 企业微信</view>
+      <view class="field-label">实际接收人姓名 *</view><input class="field-input" value="{{deliveryName}}" data-field="deliveryName" bindinput="input"/>
+      <view class="field-label">购买方授权依据 *</view><input class="field-input" value="{{deliveryAuthorization}}" data-field="deliveryAuthorization" bindinput="input" placeholder="例如授权联系人确认记录"/>
+      <button class="btn-plain" bindtap="recordDelivery">记录已完成的人工发送</button>
+      <view class="muted">已记录 {{project.externalDeliveries.length || 0}} 次外发。发送文件后无法由小程序限制接收人的后续传播。</view>
+    </view>
+  </view>
+</view>

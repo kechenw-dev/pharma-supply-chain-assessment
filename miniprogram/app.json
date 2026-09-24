@@ -1,0 +1,26 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/profile/profile",
+    "pages/quiz/quiz",
+    "pages/lead/lead",
+    "pages/privacy/privacy",
+    "pages/result/result",
+    "pages/consult/consult",
+    "pages/diagnosis/diagnosis",
+    "pages/reports/reports",
+    "pages/admin/admin",
+    "pages/admin-lead/admin-lead",
+    "pages/admin-project/admin-project",
+    "pages/admin-deep/admin-deep"
+  ],
+  "window": {
+    "navigationBarTitleText": "供应链健康评估",
+    "navigationBarBackgroundColor": "#123B58",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F5F8FA",
+    "backgroundTextStyle": "light"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

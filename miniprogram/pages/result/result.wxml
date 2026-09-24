@@ -1,0 +1,26 @@
+<view class="page" wx:if="{{assessment}}">
+  <view class="hero"><view class="hero-title">你的供应链体检结果</view><view class="hero-sub">{{assessment.companyName}} · {{assessment.date}}</view></view>
+  <view class="card">
+    <view class="section-title">整体观察</view>
+    <view wx:if="{{!insufficient}}" class="count">{{countText}}</view>
+    <view wx:else class="body">整体信息不足，建议由熟悉流程的同事共同核实。</view>
+    <view class="muted">“不清楚” {{unknownCount}} 题。此计数仅来自本次自评，不是行业健康分或百分制评分。</view>
+  </view>
+  <view wx:if="{{alerts.length}}" class="card alert"><view class="section-title">质量与供应风险需单独核实</view><view class="body" wx:for="{{alerts}}" wx:key="id">{{item.text}}</view></view>
+  <view class="section-title">七个维度</view>
+  <view class="card" wx:for="{{dimensions}}" wx:key="id">
+    <view class="row"><view class="dim-title">{{item.title}}</view><view class="status">{{item.stateLabel}}</view></view>
+    <view wx:if="{{item.hook}}" class="body">可能的线索：{{item.hook}}</view>
+    <view wx:if="{{item.action}}" class="muted">先做一步：{{item.action}}</view>
+    <view wx:if="{{item.unknownCount}}" class="muted">本维还有 {{item.unknownCount}} 项待核实。</view>
+  </view>
+  <view class="card">
+    <view class="section-title">优先核查线索</view>
+    <view wx:if="{{!findings.length}}" class="muted">目前没有从已知回答中发现需要优先核查的机制线索；这不代表企业没有其他问题。</view>
+    <view wx:for="{{findings}}" wx:key="dimension" class="finding"><view class="dim-title">{{index + 1}}. {{item.dimension}}</view><view class="body">{{item.hook}}</view><view class="muted">建议：{{item.action}}</view></view>
+  </view>
+  <view class="footer-note">{{assessment.result.disclaimer}}</view>
+  <button class="btn-primary" bindtap="consult">联系咨询</button>
+  <button class="btn-secondary" bindtap="diagnosis">申请正式诊断</button>
+  <button class="btn-plain" bindtap="home">返回首页</button>
+</view>

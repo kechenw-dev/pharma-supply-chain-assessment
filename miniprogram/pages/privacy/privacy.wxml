@@ -1,0 +1,13 @@
+<view class="page">
+  <view class="card">
+    <view class="section-title">体检信息使用说明</view>
+    <view class="body">处理者：{{settings.operatorName}}</view>
+    <view class="body">收集内容：企业名称、联系人姓名、职位、手机号、选填微信号、答题内容与小程序身份标识。</view>
+    <view class="body">用途：生成和保存本次自评结果、联系解读结果；仅在你选择了解服务或主动提出需求时，介绍正式诊断。</view>
+    <view class="body">保存期限：{{settings.retentionPolicy}}</view>
+    <view class="body">查询、更正、删除或停止联系：请通过 {{settings.contactPhone}} 与我们联系。</view>
+    <view class="body">正式诊断报告仅向购买方指定接收人开放，免费填写人不自动取得查看权。</view>
+    <view class="divider"></view>
+    <view class="muted">本页为供应链体检模块的信息使用说明。</view>
+  </view>
+</view>

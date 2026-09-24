@@ -1,0 +1,23 @@
+<view class="page">
+  <view class="hero"><view class="hero-title">已完成体检</view><view class="hero-sub">登记后查看完整免费结果。我们会联系你解读本次自评。</view></view>
+  <view class="card">
+    <view class="field-label">企业名称 *</view><input class="field-input" placeholder="请填写企业全称" data-field="companyName" bindinput="input"/>
+    <view class="field-label">联系人姓名 *</view><input class="field-input" placeholder="请输入姓名" data-field="contactName" bindinput="input"/>
+    <view class="field-label">联系人职位 *</view><input class="field-input" placeholder="例如采购经理" data-field="jobTitle" bindinput="input"/>
+    <view class="field-label">手机号 *</view><input class="field-input" type="number" maxlength="11" placeholder="用于联系解读结果" data-field="phone" bindinput="input"/>
+    <view class="field-label">微信号（选填）</view><input class="field-input" placeholder="可不填写" data-field="wechat" bindinput="input"/>
+  </view>
+  <view class="card">
+    <view class="section-title">提交前请确认</view>
+    <view class="muted">{{settings.operatorName}}会使用上述信息保存本次体检结果，并通过你填写的手机号主动联系解读。关于信息保存期限、查询、更正和删除，请阅读完整说明。</view>
+    <view class="divider"></view>
+    <view class="link" bindtap="privacy">查看完整信息使用说明</view>
+    <checkbox-group bindchange="check">
+      <label class="check-row"><checkbox value="notice" color="#0F766E"/> 我已阅读信息使用说明</label>
+      <label class="check-row"><checkbox value="callback" color="#0F766E"/> 我知晓评估人员会联系我解读本次结果</label>
+      <label class="check-row"><checkbox value="marketing" color="#0F766E"/> 我愿意了解可选的收费诊断服务（选填）</label>
+    </checkbox-group>
+  </view>
+  <button class="btn-primary" loading="{{busy}}" disabled="{{busy || !settings.privacyPublished}}" bindtap="submit">查看我的体检结果</button>
+  <view wx:if="{{!settings.privacyPublished}}" class="error">运营方尚未完成信息使用说明配置，当前不能提交联系方式。</view>
+</view>

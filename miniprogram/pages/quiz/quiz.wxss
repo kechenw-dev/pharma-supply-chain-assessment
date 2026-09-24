@@ -1,0 +1,2 @@
+.option { border: 1rpx solid #DCE5EA; border-radius: 15rpx; padding: 22rpx; margin: 18rpx 0; font-size: 27rpx; line-height: 1.5; }
+.option-active { border-color: #0F766E; color: #0F766E; background: #E9F7F3; font-weight: 600; }

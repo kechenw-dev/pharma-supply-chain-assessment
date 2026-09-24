@@ -1,0 +1,2 @@
+.check-row { display: flex; align-items: flex-start; line-height: 1.5; padding: 14rpx 0; font-size: 26rpx; }
+.link { color: #0F766E; text-decoration: underline; }

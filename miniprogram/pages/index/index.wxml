@@ -1,0 +1,22 @@
+<view class="page">
+  <view class="hero">
+    <view class="hero-title">医药供应链</view><view class="hero-title">健康评估</view>
+    <view class="hero-sub">从真实工作场景出发，发现信息、计划、供应商、库存和交付中的管理线索。</view>
+  </view>
+  <view class="card">
+    <view class="section-title">约 5 分钟，了解七个维度</view>
+    <view class="tag">信息与闭环</view><view class="tag">计划与物料</view><view class="tag">供应商</view><view class="tag">库存</view><view class="tag">仓储交付</view><view class="tag">数据支持</view><view class="tag">质量风险</view>
+    <view class="body muted">适用药品、原料药、中间体、辅料生产企业，以及 MAH、CDMO、贸易和流通企业。题目会按业务类型调整。</view>
+    <button class="btn-primary" bindtap="start">开始免费体检</button>
+  </view>
+  <view class="card">
+    <view class="section-title">你会得到什么</view>
+    <view class="body">七维表现、已落实机制的透明计数、优先核查线索和初步行动建议。</view>
+    <view class="divider"></view>
+    <view class="muted">完整免费结果需要登记企业名称、联系人、职位和手机号。评估人员会主动联系解读本次自评结果。</view>
+  </view>
+  <button class="btn-secondary" bindtap="reports">查看我的报告</button>
+  <button class="btn-plain" bindtap="consult">联系咨询</button>
+  <button wx:if="{{isAdmin}}" class="btn-plain" bindtap="admin">管理后台</button>
+  <view class="footer-note">本工具根据答题者的了解提供自评线索，不等同于企业审计或 GMP 合规认定。</view>
+</view>

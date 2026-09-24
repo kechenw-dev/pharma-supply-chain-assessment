@@ -1,0 +1,27 @@
+<view class="page" wx:if="{{allowed}}">
+  <view class="hero"><view class="hero-title">评估管理后台</view><view class="hero-sub">跟进线索、确认项目、人工审核报告。</view></view>
+  <view class="tabs"><view class="tab {{tab == 'leads' ? 'active' : ''}}" data-tab="leads" bindtap="switchTab">体检线索</view><view class="tab {{tab == 'applications' ? 'active' : ''}}" data-tab="applications" bindtap="switchTab">诊断申请</view><view class="tab {{tab == 'projects' ? 'active' : ''}}" data-tab="projects" bindtap="switchTab">项目</view><view class="tab {{tab == 'settings' ? 'active' : ''}}" data-tab="settings" bindtap="switchTab">配置</view></view>
+  <view wx:if="{{tab == 'leads'}}">
+    <view wx:if="{{!leads.length}}" class="card muted">暂无线索。</view>
+    <view class="card" wx:for="{{leads}}" wx:key="_id" data-id="{{item._id}}" bindtap="lead"><view class="row"><view class="item-title">{{item.companyName}}</view><view class="tag">{{item.followUpStatus}}</view></view><view class="muted">{{item.contactName}} · {{item.phone}} · {{item.createdAt}}</view></view>
+  </view>
+  <view wx:elif="{{tab == 'applications'}}">
+    <view wx:if="{{!applications.length}}" class="card muted">暂无诊断申请。</view>
+    <view class="card" wx:for="{{applications}}" wx:key="_id" data-id="{{item._id}}" bindtap="application"><view class="item-title">{{item.companyName}}</view><view class="body">{{item.issue}}</view><view class="muted">{{item.type}} · {{item.status}}</view></view>
+  </view>
+  <view wx:elif="{{tab == 'projects'}}">
+    <view wx:if="{{!projects.length}}" class="card muted">暂无正式诊断项目。</view>
+    <view class="card" wx:for="{{projects}}" wx:key="id" data-id="{{item.id}}" bindtap="project"><view class="item-title">{{item.title}}</view><view class="muted">{{item.buyerName}} · {{item.paymentStatus}} · {{item.reportStatus}}</view></view>
+  </view>
+  <view wx:else class="card">
+    <view class="section-title">对外联系与隐私说明</view>
+    <view class="field-label">对外微信号</view><input class="field-input" value="{{settings.contactWechat}}" data-field="contactWechat" bindinput="settingInput"/>
+    <view class="field-label">对外联系电话</view><input class="field-input" value="{{settings.contactPhone}}" data-field="contactPhone" bindinput="settingInput"/>
+    <view class="field-label">运营主体</view><input class="field-input" value="{{settings.operatorName}}" data-field="operatorName" bindinput="settingInput"/>
+    <view class="field-label">个人信息保存期限与删除规则</view><textarea class="field-textarea" value="{{settings.retentionPolicy}}" data-field="retentionPolicy" bindinput="settingInput" placeholder="经实际业务和法律审核后填写，不应使用占位文本"/>
+    <view class="field-label">告知版本</view><input class="field-input" value="{{settings.noticeVersion}}" data-field="noticeVersion" bindinput="settingInput"/>
+    <view class="row"><view>已完成正式文案审核并允许收集信息</view><switch checked="{{settings.privacyPublished}}" color="#0F766E" bindchange="privacySwitch"/></view>
+    <button class="btn-primary" loading="{{busy}}" bindtap="saveSettings">保存配置</button>
+    <view class="footer-note">发布隐私说明前，必须补齐保存期限、查询/更正/删除途径，并检查与小程序整体隐私保护指引一致。</view>
+  </view>
+</view>

@@ -1,0 +1,19 @@
+{
+  "description": "医药供应链健康评估",
+  "packOptions": {
+    "ignore": []
+  },
+  "setting": {
+    "urlCheck": true,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "trial",
+  "appid": "wxafbb48bf5de464ed",
+  "projectname": "SCCM-供应链长效管理-健康评估模块",
+  "miniprogramRoot": "miniprogram/",
+  "cloudfunctionRoot": "cloudfunctions/"
+}

@@ -1,0 +1,6 @@
+<view class="page"><view class="hero"><view class="hero-title">我的诊断报告</view><view class="hero-sub">只有付费企业指定的接收人，才能查看已批准的正式报告。</view></view>
+  <view class="card"><view class="section-title">绑定接收权限</view><view class="muted">请向项目联系人获取一次性邀请码，并填写购买方指定的接收手机号。邀请码由顾问在确认购买方授权后提供。</view><input class="field-input" placeholder="输入邀请码" value="{{code}}" bindinput="input"/><input class="field-input" type="number" maxlength="11" placeholder="指定接收人手机号" value="{{phone}}" bindinput="inputPhone"/><button class="btn-secondary" loading="{{busy}}" bindtap="redeem">绑定</button></view>
+  <view class="section-title">已授权项目</view>
+  <view wx:if="{{!reports.length}}" class="card muted">暂无可查看的项目报告。</view>
+  <view class="card" wx:for="{{reports}}" wx:key="id"><view class="dim-title">{{item.title}}</view><view class="muted">服务状态：{{item.serviceStatus}} · 报告状态：{{item.reportStatus}}</view><button class="btn-primary" wx:if="{{item.reportStatus == 'published'}}" data-id="{{item.id}}" bindtap="open">查看 PDF</button></view>
+</view>

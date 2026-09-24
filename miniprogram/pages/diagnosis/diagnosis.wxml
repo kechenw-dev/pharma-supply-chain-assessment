@@ -1,0 +1,10 @@
+<view class="page"><view class="hero"><view class="hero-title">申请正式诊断</view><view class="hero-sub">先说明问题，再由顾问与你确认范围、交付物和报价。提交申请不自动收费。</view></view>
+  <view class="card">
+    <view class="field-label">希望采用的诊断方式</view><picker range="{{types}}" range-key="label" value="{{typeIndex}}" bindchange="pickType"><view class="field-input">{{types[typeIndex].label}}</view></picker>
+    <view class="field-label">最希望解决的问题 *</view><textarea class="field-textarea" maxlength="1000" placeholder="例如：计划反复变化，关键物料总是加急采购" data-field="issue" bindinput="input"/>
+    <view class="field-label">希望涉及的业务或地点（选填）</view><textarea class="field-textarea" maxlength="500" placeholder="例如：一个工厂的采购、计划和仓库" data-field="scope" bindinput="input"/>
+    <view class="field-label">方便联系的时间（选填）</view><input class="field-input" placeholder="例如工作日下午" data-field="preferredContactTime" bindinput="input"/>
+    <button class="btn-primary" loading="{{busy}}" disabled="{{busy}}" bindtap="submit">提交诊断申请</button>
+  </view>
+  <view class="footer-note">远程专题只覆盖约定问题；现场全链路诊断也以双方确认的业务和地点范围为准。正式报告由顾问人工复核交付。</view>
+</view>

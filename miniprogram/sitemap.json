@@ -1,0 +1,7 @@
+{
+  "desc": "仅首页公开可搜索；问卷结果和企业报告不开放索引。",
+  "rules": [
+    { "action": "allow", "page": "pages/index/index" },
+    { "action": "disallow", "page": "*" }
+  ]
+}
