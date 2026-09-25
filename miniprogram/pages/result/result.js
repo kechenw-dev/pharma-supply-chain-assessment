@@ -2,7 +2,7 @@ const { api, message } = require('../../utils/api')
 const LABELS = { stable: '持续执行且有记录', uneven: '执行或记录不稳定', personal: '主要依赖个人', missing: '缺少固定做法', unknown: '待核实' }
 
 Page({
-  data: { assessment: null, dimensions: [], findings: [], alerts: [], countText: '', insufficient: false },
+  data: { assessment: null, dimensions: [], findings: [], alerts: [], countMain: '', countSub: '', insufficient: false, expandedDimension: '' },
   async onLoad(options) {
     this.id = options.id
     try {
@@ -14,10 +14,16 @@ Page({
         findings: result.findings.map(f => ({ ...f, stateLabel: LABELS[f.state] })),
         alerts: result.alerts,
         insufficient: result.informationInsufficient,
-        countText: result.count ? `已落实机制 ${result.count.implemented} / 已作实质回答 ${result.count.substantive}` : '',
+        countMain: result.count ? `${result.count.implemented} / ${result.count.substantive}` : '待补充',
+        countSub: result.count ? '已落实机制 / 已作实质回答' : '信息不足，暂不展示整体计数',
+        expandedDimension: (result.dimensions.find(d => d.hook) || result.dimensions[0] || {}).id || '',
         unknownCount: result.unknownCount
       })
     } catch (error) { message(error) }
+  },
+  toggleDimension(e) {
+    const id = e.currentTarget.dataset.id
+    this.setData({ expandedDimension: this.data.expandedDimension === id ? '' : id })
   },
   consult() { wx.navigateTo({ url: '/pages/consult/consult' }) },
   diagnosis() { wx.navigateTo({ url: `/pages/diagnosis/diagnosis?leadId=${this.id}` }) },

@@ -1,11 +1,12 @@
-<view class="page">
-  <view class="hero"><view class="hero-title">先选你的业务背景</view><view class="hero-sub">同一问题会根据生产、委托或贸易模式调整措辞。</view></view>
-  <view class="card">
-    <view class="field-label">企业类型</view>
-    <picker range="{{businesses}}" range-key="label" bindchange="pickBusiness"><view class="field-input">{{businessLabel}}</view></picker>
-    <view class="field-label">你的岗位</view>
-    <picker range="{{roles}}" range-key="label" bindchange="pickRole"><view class="field-input">{{roleLabel}}</view></picker>
-    <button class="btn-primary" bindtap="next">进入问卷</button>
+<view class="page profile-page">
+  <view class="profile-top"><view class="profile-step">准备开始 · 01 / 02</view><view class="profile-title">先告诉我们<br/>你的工作视角</view><view class="profile-sub">相同的供应链问题，在生产企业、委托方和流通企业会有不同的处理方式。</view></view>
+  <view wx:if="{{focus}}" class="focus-note"><view class="focus-dot"></view><view>本次从“{{focusLabel}}”切入，随后完成七维观察。</view></view>
+  <view class="profile-section"><view class="profile-section-title">你的企业主要属于哪一类？</view><view class="profile-section-sub">用于调整问题里的业务场景</view>
+    <view class="business-item {{businessIndex == index ? 'item-selected' : ''}}" wx:for="{{businesses}}" wx:key="value" data-index="{{index}}" bindtap="pickBusiness"><view class="business-marker">{{index + 1}}</view><view class="business-label">{{item.label}}</view><view class="selection-dot"></view></view>
   </view>
-  <view class="footer-note">请根据自己了解的业务回答。不清楚的事项可以选择“不清楚”。</view>
+  <view class="profile-section"><view class="profile-section-title">你从哪个岗位看供应链？</view><view class="profile-section-sub">最后会增加一道与你岗位相关的问题</view>
+    <view class="role-list"><view class="role-item {{roleIndex == index ? 'role-selected' : ''}}" wx:for="{{roles}}" wx:key="value" data-index="{{index}}" bindtap="pickRole">{{item.label}}</view></view>
+  </view>
+  <button class="btn-primary profile-next" bindtap="next">进入供应链体检</button>
+  <view class="footer-note">可以选择“不清楚”，它不会被当作企业缺少机制。完整免费结果需登记企业及联系人信息。</view>
 </view>

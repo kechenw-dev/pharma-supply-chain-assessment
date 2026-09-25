@@ -1,26 +1,41 @@
 <view class="page home-page">
   <view class="home-hero">
-    <view class="home-brand"><view class="brand-mark">S</view><view>SCCM · 供应链长效管理</view></view>
-    <view class="home-headline"><view>看清问题，</view><view>推动改善。</view></view>
-    <view class="home-lead">从一次体检开始，找到医药供应链中值得优先处理的管理问题。</view>
-    <view class="hero-metrics"><view class="hero-metric"><text class="metric-number">07</text><text class="metric-label">个管理维度</text></view><view class="metric-divider"></view><view class="hero-metric"><text class="metric-number">约 5</text><text class="metric-label">分钟快速体检</text></view></view>
+    <view class="home-brand"><view class="brand-mark">S</view><view>SCCM · 医药供应链管理</view></view>
+    <view class="hero-kicker">供应链健康诊断</view>
+    <view class="home-headline"><view>问题出在哪，</view><view>先从一件事查起。</view></view>
+    <view class="home-lead">把日常的催料、变更和库存压力，变成可核查的管理线索。</view>
+    <view class="chain-map">
+      <view class="chain-node"><view class="chain-dot"></view><view>需求</view></view>
+      <view class="chain-line"></view>
+      <view class="chain-node"><view class="chain-dot"></view><view>计划</view></view>
+      <view class="chain-line"></view>
+      <view class="chain-node"><view class="chain-dot"></view><view>采购</view></view>
+      <view class="chain-line"></view>
+      <view class="chain-node"><view class="chain-dot"></view><view>库存</view></view>
+      <view class="chain-line"></view>
+      <view class="chain-node"><view class="chain-dot"></view><view>交付</view></view>
+    </view>
   </view>
-  <view class="home-section-heading"><view><view class="home-eyebrow">START HERE</view><view class="home-section-title">从哪里开始</view></view><view class="section-index">01 / 03</view></view>
-  <view class="start-card" bindtap="start">
-    <view class="start-card-top"><view class="start-icon">◎</view><view class="start-badge">免费</view></view>
-    <view class="start-title">供应链快速体检</view>
-    <view class="start-desc">用真实工作场景，查看七个维度的管理线索和优先核查事项。</view>
-    <view class="start-action">开始体检 <text>→</text></view>
+
+  <view wx:if="{{hasDraft}}" class="resume-card" bindtap="resume"><view><view class="resume-eyebrow">继续上次进度</view><view class="resume-title">{{draftProgress}}</view></view><view class="resume-arrow">→</view></view>
+
+  <view class="home-section-heading"><view><view class="home-eyebrow">PICK A STARTING POINT</view><view class="home-section-title">你正遇到哪种情况？</view></view></view>
+  <view class="section-helper">选一个最贴近的问题，相关问题会先出现；完整体检仍覆盖全部七个维度。</view>
+  <view class="scene-grid">
+    <view class="scene-card scene-{{item.id}}" wx:for="{{scenes}}" wx:key="id" data-focus="{{item.id}}" bindtap="startScene">
+      <view class="scene-top"><view class="scene-number">{{item.number}}</view><view class="scene-icon">{{item.icon}}</view></view>
+      <view class="scene-title">{{item.title}}</view>
+      <view class="scene-desc">{{item.detail}}</view>
+      <view class="scene-link">从这里开始 <text>→</text></view>
+    </view>
   </view>
-  <view class="home-actions">
-    <view class="action-tile" bindtap="reports"><view class="tile-icon">▤</view><view class="tile-title">我的报告</view><view class="tile-sub">查看已授权的正式报告</view><view class="tile-arrow">↗</view></view>
-    <view class="action-tile" bindtap="consult"><view class="tile-icon">✦</view><view class="tile-title">联系顾问</view><view class="tile-sub">讨论问题与诊断范围</view><view class="tile-arrow">↗</view></view>
-  </view>
-  <view class="home-section-heading scene-heading"><view><view class="home-eyebrow">REAL WORK SCENES</view><view class="home-section-title">体检关注什么</view></view></view>
-  <view class="scene-card"><view class="scene-number">01</view><view class="scene-content"><view class="scene-title">信息有没有接上</view><view class="scene-desc">需求变更后，内外部能否依据同一版本执行，问题能否找到负责人并闭环。</view></view></view>
-  <view class="scene-card"><view class="scene-number">02</view><view class="scene-content"><view class="scene-title">计划能否带动物料</view><view class="scene-desc">关键物料是否分级管理，生产计划与供应商交付是否及时衔接。</view></view></view>
-  <view class="scene-card"><view class="scene-number">03</view><view class="scene-content"><view class="scene-title">库存与交付是否可见</view><view class="scene-desc">识别库存结构、周转与仓储交付中的待核实问题，不使用无来源的行业合格线。</view></view></view>
-  <view class="home-foot-card"><view class="foot-accent"></view><view><view class="foot-title">一份结果，也是下一步的起点</view><view class="muted">体检后查看七维表现和初步建议；需要深入判断时，再与你确认远程或现场诊断范围。</view></view></view>
+
+  <view class="full-check-card" bindtap="start"><view class="full-check-icon">◎</view><view class="full-check-main"><view class="full-check-title">直接做完整体检</view><view class="full-check-desc">约 5 分钟 · 14 道核心题 · 七维管理观察</view></view><view class="full-check-arrow">→</view></view>
+
+  <view class="home-section-heading"><view><view class="home-eyebrow">WHAT YOU GET</view><view class="home-section-title">测完之后能做什么</view></view></view>
+  <view class="journey-card"><view class="journey-step"><view class="journey-index">1</view><view><view class="journey-title">先看线索</view><view class="journey-desc">七维表现、需核查的问题与信息不足之处</view></view></view><view class="journey-step"><view class="journey-index">2</view><view><view class="journey-title">再做核查</view><view class="journey-desc">每个问题给出可以着手检查的动作</view></view></view><view class="journey-step"><view class="journey-index">3</view><view><view class="journey-title">需要时找顾问</view><view class="journey-desc">确认远程专题或现场诊断范围，再决定是否合作</view></view></view></view>
+
+  <view class="home-actions"><view class="action-tile" bindtap="reports"><view class="tile-icon">▤</view><view class="tile-title">我的报告</view><view class="tile-sub">查看已授权的正式报告</view><view class="tile-arrow">↗</view></view><view class="action-tile" bindtap="consult"><view class="tile-icon">✦</view><view class="tile-title">联系顾问</view><view class="tile-sub">交流具体问题</view><view class="tile-arrow">↗</view></view></view>
   <button wx:if="{{isAdmin}}" class="btn-plain" bindtap="admin">管理后台</button>
-  <view class="footer-note">完整免费结果需登记企业名称、联系人、职位和手机号，评估人员会主动联系解读。自评不等同于企业审计或 GMP 合规认定。</view>
+  <view class="footer-note">查看完整免费结果需登记企业名称、联系人、职位和手机号，评估人员会主动联系解读。结果依据自评信息，不等同于企业审计或 GMP 合规认定。</view>
 </view>

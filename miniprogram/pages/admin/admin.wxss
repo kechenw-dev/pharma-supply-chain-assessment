@@ -1,4 +1,4 @@
 .tabs { display: flex; overflow-x: auto; margin: 20rpx 0; gap: 12rpx; }
 .tab { background: #E7EEF2; border-radius: 999rpx; padding: 12rpx 20rpx; white-space: nowrap; font-size: 24rpx; }
-.active { background: #078C7D; color: #fff; }
+.active { background: #0B8995; color: #fff; }
 .item-title { font-size: 30rpx; font-weight: 700; margin-bottom: 10rpx; }

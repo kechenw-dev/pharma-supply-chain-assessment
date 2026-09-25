@@ -61,4 +61,9 @@ function adaptedQuestions(businessType, role) {
     .concat(role && ROLE_QUESTIONS[role] ? [{ id: 'R1', dimension: 'role', text: ROLE_QUESTIONS[role] }] : [])
 }
 
-module.exports = { OPTIONS, BUSINESS_TYPES, ROLES, DIMENSIONS, QUESTIONS, ROLE_QUESTIONS, adaptedQuestions }
+function prioritizeQuestions(questions, focus) {
+  if (!DIMENSIONS.some(d => d.id === focus)) return questions.slice()
+  return questions.filter(q => q.dimension === focus).concat(questions.filter(q => q.dimension !== focus))
+}
+
+module.exports = { OPTIONS, BUSINESS_TYPES, ROLES, DIMENSIONS, QUESTIONS, ROLE_QUESTIONS, adaptedQuestions, prioritizeQuestions }
